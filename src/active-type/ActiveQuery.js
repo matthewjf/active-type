@@ -1,4 +1,4 @@
-export default class Query {
+export default class ActiveQuery {
   constructor(adapter, showQuery, listQuery) {
     this.adapter = adapter;
     this.listQuery = listQuery;

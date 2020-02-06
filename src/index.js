@@ -1,6 +1,6 @@
 import ActiveType from './active-type/ActiveType';
 
-export { default as Query } from './active-type/Query';
+export { default as ActiveQuery } from './active-type/ActiveQuery';
 export { default as Adapter } from './active-type/connection/Adapter';
 export { default as RecordSource } from './active-type/sources/RecordSource';
 export { default as CollectionSource } from './active-type/sources/CollectionSource';
