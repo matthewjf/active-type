@@ -5,6 +5,7 @@ export default class CollectionSource extends BaseSource {
   constructor(type, query, objectPath, options = {}) {
     super(type, query, objectPath);
 
+    this.arguments = {};
     this.paginated = options.paginated;
   }
 
@@ -31,15 +32,28 @@ export default class CollectionSource extends BaseSource {
     return get(response, ['data', 'data', this.objectPath, 'pageInfo'], null);
   }
 
-  all(variables) {
+  where(arguments) {
+    Object.assign(this.arguments, arguments);
+    return this;
+  }
+
+  all() {
     this._requested = true;
     this._loading = true;
     this.dispatchUpdate();
 
-    return this.query.list(variables).then(this.handleResponse);
+    return this.query.list(this.arguments).then(this.handleResponse);
   }
 
   records() {
     return this._records;
+  }
+
+  hasNextPage() {
+    return this._paginationData && this._paginationData.hasNextPage || false;
+  }
+
+  nextPage() {
+    throw new Error('not implemented');
   }
 };
