@@ -17,7 +17,7 @@ export default class ActiveType {
     this._data = data;
     this._associations = {};
 
-    this.buildAssociations(data);
+    if (data) this.buildAssociations(data);
     this.constructor.defineMethods();
   }
 
