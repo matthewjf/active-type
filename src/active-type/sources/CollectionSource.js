@@ -12,7 +12,7 @@ export default class CollectionSource extends BaseSource {
   handleResponse(response) {
     this._loading = false;
 
-    this._records = this.recordData(response).map(datum => new this.type(datum));
+    this._records = this.recordData(response) && this.recordData(response).map(datum => new this.type(datum));
     this._errors = this.errorData(response);
 
     if (this.paginated) this._paginationData = this.paginationData(response);
@@ -24,7 +24,7 @@ export default class CollectionSource extends BaseSource {
 
   recordData(response) {
     const results = get(response, ['data', 'data', this.objectPath], null);
-    if (this.paginated) return results.nodes;
+    if (this.paginated) return get(results, 'nodes', null);
     return results;
   }
 
