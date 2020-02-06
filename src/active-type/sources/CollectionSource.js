@@ -5,7 +5,7 @@ export default class CollectionSource extends BaseSource {
   constructor(type, query, objectPath, options = {}) {
     super(type, query, objectPath);
 
-    this.arguments = {};
+    this.args = {};
     this.paginated = options.paginated;
   }
 
@@ -32,8 +32,8 @@ export default class CollectionSource extends BaseSource {
     return get(response, ['data', 'data', this.objectPath, 'pageInfo'], null);
   }
 
-  where(arguments) {
-    Object.assign(this.arguments, arguments);
+  where(args) {
+    Object.assign(this.args, args);
     return this;
   }
 
@@ -42,7 +42,7 @@ export default class CollectionSource extends BaseSource {
     this._loading = true;
     this.dispatchUpdate();
 
-    return this.query.list(this.arguments).then(this.handleResponse);
+    return this.query.list(this.args).then(this.handleResponse);
   }
 
   records() {
